@@ -10,7 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-     "onLanguage:php"
+    "onLanguage:php"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -22,6 +22,14 @@
       {
         "command": "horas",
         "title": "Horas"
+      },
+      {
+        "command": "is_php",
+        "title": "PHP"
+      },
+      {
+        "command": "is_dto",
+        "title": "PHP_dto"
       }
     ]
   },
