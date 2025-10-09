@@ -18,7 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
        fetchHours();
     });
 
-	fetchHours();
+	//fetchHours();
 
 	context.subscriptions.push(horario);
 }
