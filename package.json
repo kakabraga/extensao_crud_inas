@@ -24,8 +24,8 @@
         "title": "Horas"
       },
       {
-        "command": "is_php",
-        "title": "PHP"
+        "command": "turno",
+        "title": "Horas fim turno"
       },
       {
         "command": "hello",

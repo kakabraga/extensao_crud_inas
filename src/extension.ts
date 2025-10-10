@@ -17,6 +17,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const helloService = new HelloService();
 	const helloCommand = new HelloCommand(helloService);
+
+	horasCommand.horas(context);
 	horasCommand.register(context);
 	helloCommand.register(context);
 	const hello = helloService.getHelloMsg();
