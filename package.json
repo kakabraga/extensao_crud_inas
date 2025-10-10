@@ -28,7 +28,7 @@
         "title": "PHP"
       },
       {
-        "command": "is_dto",
+        "command": "hello",
         "title": "PHP_dto"
       }
     ]
