@@ -16,11 +16,8 @@ export class FileService {
             fs.writeFileSync(filePath, content, "utf8");
             return true;
         } catch (error) {
-            console.error("Erro ao criar arquivo:", error);
             return false;
         }
     }
 
-    
-
-}
+}   
