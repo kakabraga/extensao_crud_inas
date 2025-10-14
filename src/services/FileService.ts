@@ -4,7 +4,7 @@ import * as path from "path";
 
 export class FileService {
 
-    arquivoExists(filePath: string): boolean {
+    verificaArquivoExistente(filePath: string): boolean {
         if (fs.existsSync(filePath)) {
             return true;
         }
@@ -18,6 +18,15 @@ export class FileService {
         } catch (error) {
             return false;
         }
+    }
+
+
+    obterExtensao(filePath: string): string {
+        return path.extname(filePath).toLowerCase();
+    }
+
+    lerArquivo(filePath: string): string {
+        return fs.readFileSync(filePath, "utf8");
     }
 
 }   
