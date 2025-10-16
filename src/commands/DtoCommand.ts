@@ -3,7 +3,7 @@ import * as path from "path";
 import { FileService } from "../services/FileService";
 import { DtoService } from "../services/DtoService";
 
-export class FileCommand {
+export class DtoCommand {
     private dtoService: DtoService;
 
     constructor() {
@@ -29,7 +29,7 @@ export class FileCommand {
 
     async execute() {
         const nome = await this.chamaPrompt();
-        if (!nome) {
+        if (!nome) { 
             return;
         }
 

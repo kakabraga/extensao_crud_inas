@@ -8,13 +8,18 @@ import { TimeService } from "./services/TimeService";
 import { HelloCommand } from './commands/HelloCommand';
 import { HelloService } from './services/HelloService';
 import { DtoService } from './services/DtoService';
+import { DtoCommand} from './commands/DtoCommand';
 import { FileService } from './services/FileService';
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-
-	
+	const dtoCommand = new DtoCommand();
+	const disposable = vscode.commands.registerCommand(
+        "criar_dto",
+        () => dtoCommand.execute()
+    );
+	 context.subscriptions.push(disposable);
 	// const timeService = new TimeService();
 	// const horasCommand = new HorasCommand(timeService);
 

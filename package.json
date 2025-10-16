@@ -10,7 +10,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:php"
+    "onCommand:criar_dto"
+
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -28,7 +29,7 @@
         "title": "Horas fim turno"
       },
       {
-        "command": "hello",
+        "command": "criar_dto",
         "title": "PHP_dto"
       }
     ]
