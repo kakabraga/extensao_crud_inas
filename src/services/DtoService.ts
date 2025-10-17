@@ -14,7 +14,7 @@ export class DtoService {
     }
 
     criaDto(nome: string): boolean {
-        const nomeFormatado = this.formataNomeDto(nome);
+        const nomeFormatado = this.geraNomeArquivoDto(nome);
         const caminho = path.join(this.dtoDirectory, nomeFormatado);
 
         if (this.fileService.verificaArquivoExistente(caminho)) {
@@ -33,14 +33,17 @@ export class DtoService {
         return template;
     }
 
-    formataNomeDto(nome: string): string {
-        let nomeLimpo = nome.replace(/\s+/g, "").replace(/[^a-zA-Z0-9]/g, "");
 
-        // Deixa a primeira letra maiúscula
-        if (nomeLimpo.length > 0) {
-            nomeLimpo = nomeLimpo.charAt(0).toUpperCase() + nomeLimpo.slice(1);
-        }
+    geraNomeArquivoDto(nome: string): string {
+        let nomeLimpo = this.normalizaNomeClasse(nome);
         return `${nomeLimpo}.php`;
+    }
+
+    normalizaNomeClasse(nome: string): string {
+        let nomeLimpo = nome.replace(/\s+/g, "").replace(/[^a-zA-Z0-9_]/g, "");
+        nomeLimpo = nomeLimpo.replace(/_([a-zA-Z])/g, (_, letra) => letra.toUpperCase());
+        nomeLimpo = nomeLimpo.charAt(0).toUpperCase() + nomeLimpo.slice(1);
+        return nomeLimpo;
     }
 
 }
