@@ -1,4 +1,3 @@
-// src/services/IFileService.ts
 export interface IFileService {
     verificaArquivoExistente(filePath: string): boolean;
     criaArquivo(filePath: string, content: string): boolean;

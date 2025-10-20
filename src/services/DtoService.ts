@@ -1,4 +1,4 @@
-import { IFileService } from "./IFileService";
+import { IFileService } from "../interfaces/IFileService";
 import * as path from 'path';
 import * as vscode from "vscode";
 
