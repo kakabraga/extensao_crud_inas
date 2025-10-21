@@ -12,7 +12,7 @@ export class DtoCommand {
     constructor() {
         const workspaceRoot = vscode.workspace.rootPath || '';
         const fileService = new FileService();
-        this.dtoService = new DtoService(fileService);
+        this.dtoService = new DtoService(fileService, this.eventBus);
         const createActionObserver = new CreateActionObserver(fileService);
         this.eventBus.on("dtoCriado", (payload) => createActionObserver.handle(payload));
     }

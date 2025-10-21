@@ -6,9 +6,8 @@ import * as vscode from "vscode";
 export class DtoService {
     private readonly workspaceRoot: string;
     private readonly dtoDirectory: string;
-    private observer: EventBus;
 
-    constructor(private fileService: IFileService) {
+    constructor(private fileService: IFileService, private observer: EventBus) {
         this.workspaceRoot = vscode.workspace.workspaceFolders
             ? vscode.workspace.workspaceFolders[0].uri.fsPath
             : '';
@@ -18,13 +17,16 @@ export class DtoService {
     criaDto(nome: string): boolean {
         const nomeFormatado = this.geraNomeArquivoDto(nome);
         const caminho = path.join(this.dtoDirectory, nomeFormatado);
-
         if (this.fileService.verificaArquivoExistente(caminho)) {
             return false;
         }
-
         const conteudo = this.gerarConteudoTemplate(nomeFormatado);
-        return this.fileService.criaArquivo(caminho, conteudo);
+        const sucesso = this.fileService.criaArquivo(caminho, conteudo);
+        if (sucesso) {
+            this.chamaObserver(nomeFormatado);
+            return true;
+        }
+        return false;
     }
 
     gerarConteudoTemplate(nome: string): string {
@@ -48,7 +50,8 @@ export class DtoService {
         return nomeLimpo;
     }
 
-    chamaObserver(nome: string): boolean {
-        return this.observer.on();
+    chamaObserver(nome: string): void {
+        const nomeSemExtensao = nome.replace(/\.php$/i, "");
+        this.observer.emit("dtoCriado", { nome: nomeSemExtensao });
     }
 }

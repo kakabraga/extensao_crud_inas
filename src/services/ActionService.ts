@@ -1,17 +1,25 @@
 import * as path from 'path';
 import { IFileService } from "../interfaces/IFileService";
-
+import * as vscode from "vscode";
 export class ActionService {
 
-    constructor(private fileService: IFileService) { }
+    private readonly workspaceRoot: string;
+    private readonly dtoDirectory: string;
 
+    constructor(private fileService: IFileService) {
+        this.workspaceRoot = vscode.workspace.workspaceFolders
+            ? vscode.workspace.workspaceFolders[0].uri.fsPath
+            : '';
+        this.dtoDirectory = path.join(this.workspaceRoot, "./actions");
+    }
     criaAction(nome: string): boolean {
-        const nomeArquivo = this.geraNomeArquivoDto(nome);
-
-        if (this.fileService.verificaArquivoExistente(nomeArquivo)) {
+        const nomeFormatado = this.geraNomeArquivoDto(nome);
+        const caminho = path.join(this.dtoDirectory, nomeFormatado);
+        if (this.fileService.verificaArquivoExistente(caminho)) {
             return false;
         }
-
+        const conteudo = this.gerarConteudoTemplate(nomeFormatado);
+        this.fileService.criaArquivo(caminho, conteudo);
         return false;
     }
 
@@ -24,13 +32,13 @@ export class ActionService {
     }
     geraNomeArquivoDto(nome: string): string {
         let nomeFormatado = this.normalizaNomeClasse(nome);
-        return `${nomeFormatado}.php`;
+        return `${nomeFormatado}`;
     }
 
     normalizaNomeClasse(nome: string): string {
         let nomeLimpo = nome.replace(/\s+/g, "").replace(/[^a-zA-Z0-9_]/g, "");
         nomeLimpo = nomeLimpo.replace(/_([a-zA-Z])/g, (_, letra) => letra.toUpperCase());
         nomeLimpo = nomeLimpo.charAt(0).toUpperCase() + nomeLimpo.slice(1);
-        return `Manter${nomeLimpo}`;
+        return `Manter${nomeLimpo}.php`;
     }
 }
