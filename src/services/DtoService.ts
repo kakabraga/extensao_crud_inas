@@ -1,10 +1,12 @@
 import { IFileService } from "../interfaces/IFileService";
+import { EventBus } from "../core/EventBus";
 import * as path from 'path';
 import * as vscode from "vscode";
 
 export class DtoService {
     private readonly workspaceRoot: string;
     private readonly dtoDirectory: string;
+    private observer: EventBus;
 
     constructor(private fileService: IFileService) {
         this.workspaceRoot = vscode.workspace.workspaceFolders
@@ -46,4 +48,7 @@ export class DtoService {
         return nomeLimpo;
     }
 
+    chamaObserver(nome: string): boolean {
+        return this.observer.on();
+    }
 }

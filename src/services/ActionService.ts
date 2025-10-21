@@ -12,7 +12,7 @@ export class ActionService {
             return false;
         }
 
-        const conteudo =;
+        return false;
     }
 
     gerarConteudoTemplate(nome: string): string {
