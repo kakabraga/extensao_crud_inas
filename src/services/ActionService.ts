@@ -20,7 +20,7 @@ export class ActionService {
         }
         const conteudo = this.gerarConteudoTemplate(nomeFormatado);
         this.fileService.criaArquivo(caminho, conteudo);
-        return false;
+        return true;
     }
 
     gerarConteudoTemplate(nome: string): string {
@@ -30,6 +30,7 @@ export class ActionService {
         template = template.replace("{{CLASS_NAME}}", nomeSemExtensao);
         return template;
     }
+
     geraNomeArquivoDto(nome: string): string {
         let nomeFormatado = this.normalizaNomeClasse(nome);
         return `${nomeFormatado}`;
