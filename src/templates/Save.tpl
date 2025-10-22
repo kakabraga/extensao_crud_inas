@@ -10,6 +10,6 @@ $id = isset($_POST['id']) ? $_POST['id'] : 0;
 ${{VARIAVEL}}->id = $id;
 
 $db_{{INSTANCIA}}->salvar(${{VARIAVEL}});
-header('Location: servicos.php');
+header('Location: {{INSTANCIA}}.php');
 
 
