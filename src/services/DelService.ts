@@ -63,7 +63,7 @@ export class DelService {
 
     substituirPlaceholders(template: string, dados: Record<string, string>): string {
         for (const chave in dados) {
-            const regex = new RegExp(`{{${chave}}}`);
+            const regex = new RegExp(`{{${chave}}}`, "g");
             template = template.replace(regex, dados[chave]);
         }
         return template;

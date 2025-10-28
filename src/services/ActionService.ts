@@ -27,7 +27,7 @@ export class ActionService {
         const templatePath = path.resolve(__dirname, "../dist/templates/Action.tpl");
         let template = this.fileService.lerArquivo(templatePath);
         const nomeSemExtensao = nome.replace(/\.php$/i, "");
-        template = template.replace("{{CLASS_NAME}}", nomeSemExtensao);
+        template = template.replace(/{{CLASS_NAME}}/g, nomeSemExtensao);
         return template;
     }
 
