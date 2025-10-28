@@ -2,7 +2,7 @@ import { IFileService } from "../interfaces/IFileService";
 import * as path from 'path';
 import * as vscode from "vscode";
 
-export class SalvaService {
+export class DelService {
     private readonly workspaceRoot: string;
     private readonly dtoDirectory: string;
 
@@ -13,8 +13,8 @@ export class SalvaService {
         this.dtoDirectory = path.join(this.workspaceRoot, "/");
     }
 
-    criaSave(nome: string): boolean {
-        const nomeFormatado = this.geraNomeArquivoDto(nome);
+    criaDel(nome: string): boolean {
+        const nomeFormatado = this.geraNomeArquivoDel(nome);
         const caminho = path.join(this.dtoDirectory, nomeFormatado);
         if (this.fileService.verificaArquivoExistente(caminho)) {
             return false;
@@ -25,7 +25,7 @@ export class SalvaService {
     }
 
     gerarConteudoTemplate(nome: string): string {
-        const templatePath = path.resolve(__dirname, "../dist/templates/Save.tpl");
+        const templatePath = path.resolve(__dirname, "../dist/templates/Del.tpl");
         let template = this.fileService.lerArquivo(templatePath);
         const nomeSemExtensao = nome.replace(/\.php$/i, "");
         const nomeLowerCase = this.toLowerCase(nome);
@@ -40,19 +40,19 @@ export class SalvaService {
     }
 
 
-    geraNomeArquivoDto(nome: string): string {
+    geraNomeArquivoDel(nome: string): string {
         let nomeLimpo = this.normalizaNomeClasse(nome);
         return `${nomeLimpo}.php`;
     }
 
     normalizaNomeClasse(nome: string): string {
-        if (!nome) { return "save_"; }
+        if (!nome) { return "del_"; }
 
-        let nomelimpo = nome.trim().replace(/^save_/i, ""); // remove prefixo
+        let nomelimpo = nome.trim().replace(/^del/i, ""); // remove prefixo
         nomelimpo = nomelimpo.replace(/([a-z0-9])([A-Z])/g, "$1_$2"); // insere _
         nomelimpo = nomelimpo.toLowerCase();
 
-        return `save_${nomelimpo}`;
+        return `del_${nomelimpo}`;
     } 
 
 

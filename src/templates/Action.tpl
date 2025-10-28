@@ -11,7 +11,7 @@ class {{CLASS_NAME}} extends Model {
 
     }
 
-    function salvar() {
+    function salvar( $dados) {
 
     }
 
