@@ -44,7 +44,8 @@ export class DtoService {
     }
 
     normalizaNomeClasse(nome: string): string {
-        let nomeLimpo = nome.replace(/\s+/g, "").replace(/[^a-zA-Z0-9_]/g, "");
+        let nome_lower = nome.toLowerCase();
+        let nomeLimpo = nome_lower.replace(/\s+/g, "").replace(/[^a-zA-Z0-9_]/g, "");
         nomeLimpo = nomeLimpo.replace(/_([a-zA-Z])/g, (_, letra) => letra.toUpperCase());
         nomeLimpo = nomeLimpo.charAt(0).toUpperCase() + nomeLimpo.slice(1);
         return nomeLimpo;

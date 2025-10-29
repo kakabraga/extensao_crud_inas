@@ -6,6 +6,7 @@ import { EventBus } from "../core/EventBus";
 import { CreateActionObserver } from "../observers/CreateActionObserver";
 import { CreateSalvaObserver } from "../observers/CreateSalvaObserver";
 import { CreateDelObserver } from "../observers/CreateDelObserver";
+import { CreateGetObserver } from "../observers/CreateGetObserver";
 
 export class DtoCommand {
     private dtoService: DtoService;
@@ -18,9 +19,11 @@ export class DtoCommand {
         const createActionObserver = new CreateActionObserver(fileService);
         const createSalvaObserver = new CreateSalvaObserver(fileService);
         const createDelObserver = new CreateDelObserver(fileService);
+        const createGetObserver = new CreateGetObserver(fileService);
         this.eventBus.on("dtoCriado", (payload) => createActionObserver.handle(payload));
         this.eventBus.on("dtoCriado", (payload) => createSalvaObserver.handle(payload));
         this.eventBus.on("dtoCriado", (payload) => createDelObserver.handle(payload));
+        this.eventBus.on("dtoCriado", (payload) => createGetObserver.handle(payload));
     }
 
     async chamaPrompt(): Promise<string | undefined> {
