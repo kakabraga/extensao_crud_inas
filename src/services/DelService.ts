@@ -10,7 +10,7 @@ export class DelService {
         this.workspaceRoot = vscode.workspace.workspaceFolders
             ? vscode.workspace.workspaceFolders[0].uri.fsPath
             : '';
-        this.dtoDirectory = path.join(this.workspaceRoot, "/");
+        this.dtoDirectory = path.join(this.workspaceRoot, "./projeto");
     }
 
     criaDel(nome: string): boolean {

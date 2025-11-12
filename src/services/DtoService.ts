@@ -11,7 +11,7 @@ export class DtoService {
         this.workspaceRoot = vscode.workspace.workspaceFolders
             ? vscode.workspace.workspaceFolders[0].uri.fsPath
             : '';
-        this.dtoDirectory = path.join(this.workspaceRoot, "./dto");
+        this.dtoDirectory = path.join(this.workspaceRoot, "./projeto/dto");
     }
 
     criaDto(nome: string): boolean {

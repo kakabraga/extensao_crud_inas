@@ -2,7 +2,7 @@
   "name": "phpCrudInas",
   "displayName": "php_crud_inas",
   "description": "Gerador de CRUD padrão PHP interno",
-  "version": "0.0.1",
+  "version": "1.0.4",
   "engines": {
     "vscode": "^1.104.0"
   },
@@ -30,7 +30,7 @@
       },
       {
         "command": "criar_dto",
-        "title": "PHP_dto"
+        "title": "Criador de Crud"
       }
     ]
   },

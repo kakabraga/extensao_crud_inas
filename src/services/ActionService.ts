@@ -10,7 +10,7 @@ export class ActionService {
         this.workspaceRoot = vscode.workspace.workspaceFolders
             ? vscode.workspace.workspaceFolders[0].uri.fsPath
             : '';
-        this.dtoDirectory = path.join(this.workspaceRoot, "./actions");
+        this.dtoDirectory = path.join(this.workspaceRoot, "./projeto/actions");
     }
     criaAction(nome: string): boolean {
         const nomeFormatado = this.geraNomeArquivoDto(nome);
@@ -22,6 +22,7 @@ export class ActionService {
         this.fileService.criaArquivo(caminho, conteudo);
         return true;
     }
+    
 
     gerarConteudoTemplate(nome: string): string {
         const templatePath = path.resolve(__dirname, "../dist/templates/Action.tpl");

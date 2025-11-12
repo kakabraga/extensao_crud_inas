@@ -28,8 +28,8 @@ export class DtoCommand {
 
     async chamaPrompt(): Promise<string | undefined> {
         const input = await vscode.window.showInputBox({
-            prompt: "Digite o nome do DTO (sem 'Dto')",
-            placeHolder: "Exemplo: Usuario",
+            prompt: "Digite o nome da tabela",
+            placeHolder: "Exemplo: usuario_inas",
         });
 
         if (!input) {
