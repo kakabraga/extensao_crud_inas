@@ -1,5 +1,5 @@
 <?php 
-require_once('actions/{{CLASS_NAME}}.php');
+require_once('actions/Manter{{CLASS_NAME}}.php');
 $manter{{CLASS_NAME}} = new Manter{{CLASS_NAME}}();
 ${{INSTANCIA}} = $manter{{CLASS_NAME}}->lista();
 

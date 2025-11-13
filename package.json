@@ -2,7 +2,7 @@
   "name": "phpCrudInas",
   "displayName": "php_crud_inas",
   "description": "Gerador de CRUD padrão PHP interno",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "engines": {
     "vscode": "^1.104.0"
   },
