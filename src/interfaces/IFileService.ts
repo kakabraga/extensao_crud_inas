@@ -3,5 +3,5 @@ export interface IFileService {
     criaArquivo(filePath: string, content: string): boolean;
     lerArquivo(filePath: string): string;
     obterExtensao(filePath: string): string;
-    deletarArquivo(filePath: string): boolean;
+    deletarArquivo(filePath: string): Promise<void>;
 }

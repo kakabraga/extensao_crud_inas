@@ -23,6 +23,11 @@ export class GetService {
         this.fileService.criaArquivo(caminho, conteudo);
         return true;
     }
+     deletaDel(nome: string): boolean {
+        const nomeFormatado = this.geraNomeArquivoDel(nome);
+        this.fileService.deletarArquivo(nomeFormatado);
+        return true;
+    }
 
     gerarConteudoTemplate(nome: string): string {
         const templatePath = path.resolve(__dirname, "../dist/templates/Get.tpl");

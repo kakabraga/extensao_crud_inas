@@ -13,4 +13,7 @@ export class CreateGetObserver implements IObserver {
     handle(payload: { nome: string }): void {
         this.getService.criaDel(payload.nome);
     }
+    deleta(payload: { nome: string }): void {
+        this.getService.deletaDel(payload.nome);
+    }
 }

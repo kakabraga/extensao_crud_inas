@@ -24,9 +24,10 @@ export class DtoCommand {
         this.eventBus.on("dtoCriado", (payload) => createSalvaObserver.handle(payload));
         this.eventBus.on("dtoCriado", (payload) => createDelObserver.handle(payload));
         this.eventBus.on("dtoCriado", (payload) => createGetObserver.handle(payload));
+        this.eventBus.on("dtoDeletado", (payload) => createGetObserver.deleta(payload));
     }
 
-    async chamaPrompt(): Promise<string | undefined> {
+    async criaCrud(): Promise<string | undefined> {
         const input = await vscode.window.showInputBox({
             prompt: "Digite o nome da tabela",
             placeHolder: "Exemplo: usuario_inas",
@@ -40,8 +41,39 @@ export class DtoCommand {
         return input;
     }
 
-    async execute() {
-        const nome = await this.chamaPrompt();
+    async deletaCrud(): Promise<string | undefined> {
+        const input = await vscode.window.showInputBox({
+            prompt: "Digite o nome da tabela para deletar",
+            placeHolder: "Exemplo: usuario_inas",
+        });
+
+        if (!input) {
+            vscode.window.showErrorMessage("Não foi possivel deletar");
+            return undefined;
+        }
+
+        return input;
+    }
+
+    async executaExclusao() {
+        const nome = await this.deletaCrud();
+        if (!nome) {
+            return;
+        }
+
+        let caminho = this.dtoService.geraNomeArquivoDto(nome);
+            vscode.window.showInformationMessage("DTO" + this.dtoService.deletaDto(nome) + "CAMINHO: " + caminho);
+
+
+        // if (!sucesso) {
+        //     vscode.window.showErrorMessage(
+        //         `Erro: O DTO "${nome}Dto.php" não existe ou já foi deletado.`
+        //     );
+        // }
+    }
+
+    async executaCriacao() {
+        const nome = await this.criaCrud();
         if (!nome) {
             return;
         }

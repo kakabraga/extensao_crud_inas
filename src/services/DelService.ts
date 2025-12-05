@@ -55,7 +55,6 @@ export class DelService {
         return `del_${nomelimpo}`;
     } 
 
-
     toLowerCase(nome: string): string {
         nome = nome.replace(/([a-z0-9])([A-Z])/g, "$1_$2");
         return nome.toLowerCase();

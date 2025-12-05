@@ -8,33 +8,24 @@ import { TimeService } from "./services/TimeService";
 import { HelloCommand } from './commands/HelloCommand';
 import { HelloService } from './services/HelloService';
 import { DtoService } from './services/DtoService';
-import { DtoCommand} from './commands/DtoCommand';
+import { DtoCommand } from './commands/DtoCommand';
 import { FileService } from './services/FileService';
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
 	const dtoCommand = new DtoCommand();
-	const disposable = vscode.commands.registerCommand(
-        "criar_dto",
-        () => dtoCommand.execute()
-    );
-	 context.subscriptions.push(disposable);
-	// const timeService = new TimeService();
-	// const horasCommand = new HorasCommand(timeService);
+	const criaCrud = vscode.commands.registerCommand(
+		"criar_dto",
+		() => dtoCommand.executaCriacao()
+	);
+	const deletaCrud = vscode.commands.registerCommand(
+		"deleta_crud",
+		() => dtoCommand.executaExclusao()
+	);
 
-	// const helloService = new HelloService();
-	// const helloCommand = new HelloCommand(helloService);
-	// const fileService  = new FileService();
-	// const dtoService = new DtoService(fileService);
-	// horasCommand.horas(context);
-	// horasCommand.register(context);
-	// helloCommand.register(context);
-	// const hello = helloService.getHelloMsg();
-	// const time = timeService.getCurrentTime();
-	// vscode.window.showInformationMessage(`Hora atual: ${time.toString()}`);
-	// const nomePadrao = dtoService.formataNomeDto("Usuario Teste");
-	// vscode.window.showInformationMessage(`Nome padronizado: ${nomePadrao}`);
+	context.subscriptions.push(criaCrud, deletaCrud);
+	// context.subscriptions.push(deletaCrud);
 }
 export function deactivate() { }
 // This method is called when your extension is deactivated

@@ -3,7 +3,7 @@ import * as path from "path";
 import { IFileService } from "../interfaces/IFileService";
 
 
-export class FileService implements IFileService{
+export class FileService implements IFileService {
 
     verificaArquivoExistente(filePath: string): boolean {
         if (fs.existsSync(filePath)) {
@@ -17,7 +17,7 @@ export class FileService implements IFileService{
             fs.writeFileSync(filePath, content, "utf8");
             return true;
         } catch (error) {
-             console.error(`Erro ao criar o arquivo ${filePath}:`, error);
+            console.error(`Erro ao criar o arquivo ${filePath}:`, error);
             return false;
         }
     }
@@ -31,8 +31,17 @@ export class FileService implements IFileService{
         return fs.readFileSync(filePath, "utf8");
     }
 
-    deletarArquivo(filePath: string): boolean {
-        return false;
+    deletarArquivo(filePath: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            fs.unlink(filePath, (err) => {
+                if (err) {
+                    return console.error("not Deleted file:", filePath);
+                }
+
+                console.log("Deleted file:", filePath);
+                resolve();
+            });
+        });
     }
 
-}   
+} 

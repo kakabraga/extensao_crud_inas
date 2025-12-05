@@ -11,7 +11,7 @@ export class DtoService {
         this.workspaceRoot = vscode.workspace.workspaceFolders
             ? vscode.workspace.workspaceFolders[0].uri.fsPath
             : '';
-        this.dtoDirectory = path.join(this.workspaceRoot, "./projeto/dto");
+        this.dtoDirectory = path.join(this.workspaceRoot, "./dto");
     }
 
     criaDto(nome: string): boolean {
@@ -23,7 +23,7 @@ export class DtoService {
         const conteudo = this.gerarConteudoTemplate(nomeFormatado);
         const sucesso = this.fileService.criaArquivo(caminho, conteudo);
         if (sucesso) {
-            this.chamaObserver(nomeFormatado);
+            this.chamaObserverCria(nomeFormatado);
             return true;
         }
         return false;
@@ -51,8 +51,20 @@ export class DtoService {
         return nomeLimpo;
     }
 
-    chamaObserver(nome: string): void {
+    chamaObserverCria(nome: string): void {
         const nomeSemExtensao = nome.replace(/\.php$/i, "");
         this.observer.emit("dtoCriado", { nome: nomeSemExtensao });
     }
+    chamaObserverDeleta(nome: string, event: string): void {
+        const nomeSemExtensao = nome.replace(/\.php$/i, "");
+        this.observer.emit(event, { nome: nomeSemExtensao });
+    }
+
+    async deletaDto(nome: string): Promise<void> {
+        const nomeFormatado = this.geraNomeArquivoDto(nome);
+        const filePath = path.join(this.workspaceRoot, `./dto/${nomeFormatado}`);
+        await this.fileService.deletarArquivo(filePath);
+        this.chamaObserverDeleta("dtoDeletado", nomeFormatado);
+    }
+
 }
