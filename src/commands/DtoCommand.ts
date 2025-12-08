@@ -61,15 +61,7 @@ export class DtoCommand {
             return;
         }
 
-        let caminho = this.dtoService.geraNomeArquivoDto(nome);
-            vscode.window.showInformationMessage("DTO" + this.dtoService.deletaDto(nome) + "CAMINHO: " + caminho);
-
-
-        // if (!sucesso) {
-        //     vscode.window.showErrorMessage(
-        //         `Erro: O DTO "${nome}Dto.php" não existe ou já foi deletado.`
-        //     );
-        // }
+        await this.dtoService.deletaDto(nome);
     }
 
     async executaCriacao() {

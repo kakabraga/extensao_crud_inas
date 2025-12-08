@@ -10,11 +10,11 @@ export class GetService {
         this.workspaceRoot = vscode.workspace.workspaceFolders
             ? vscode.workspace.workspaceFolders[0].uri.fsPath
             : '';
-        this.dtoDirectory = path.join(this.workspaceRoot, "./projeto");
+        this.dtoDirectory = path.join(this.workspaceRoot, "./");
     }
 
     criaDel(nome: string): boolean {
-        const nomeFormatado = this.geraNomeArquivoDel(nome);
+        const nomeFormatado = this.geraNomeArquivoGet(nome);
         const caminho = path.join(this.dtoDirectory, nomeFormatado);
         if (this.fileService.verificaArquivoExistente(caminho)) {
             return false;
@@ -23,11 +23,11 @@ export class GetService {
         this.fileService.criaArquivo(caminho, conteudo);
         return true;
     }
-     deletaDel(nome: string): boolean {
-        const nomeFormatado = this.geraNomeArquivoDel(nome);
-        this.fileService.deletarArquivo(nomeFormatado);
-        return true;
-    }
+    // deletaDel(nome: string): boolean {
+    //     const nomeFormatado = this.geraNomeArquivoGet(nome);
+    //     this.fileService.deletarArquivo(nomeFormatado);
+    //     return true;
+    // }
 
     gerarConteudoTemplate(nome: string): string {
         const templatePath = path.resolve(__dirname, "../dist/templates/Get.tpl");
@@ -45,7 +45,7 @@ export class GetService {
     }
 
 
-    geraNomeArquivoDel(nome: string): string {
+    geraNomeArquivoGet(nome: string): string {
         let nomeLimpo = this.normalizaNomeClasse(nome);
         return `${nomeLimpo}.php`;
     }
@@ -58,7 +58,7 @@ export class GetService {
         nomelimpo = nomelimpo.toLowerCase();
 
         return `get_${nomelimpo}`;
-    } 
+    }
 
 
     toLowerCase(nome: string): string {
@@ -75,7 +75,12 @@ export class GetService {
     }
 
     gerarVariavel(nome: string): string {
-        const nomeLowerCase =this.toLowerCase(nome); 
-         return nomeLowerCase.charAt(0);
+        const nomeLowerCase = this.toLowerCase(nome);
+        return nomeLowerCase.charAt(0);
+    }
+    async deletaDel(nome: string): Promise<void> {
+        const nomeFormatado = this.geraNomeArquivoGet(nome);
+        const filePath = path.join(this.workspaceRoot, `./${nomeFormatado}`);
+        await this.fileService.deletarArquivo(filePath);
     }
 }

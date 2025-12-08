@@ -10,10 +10,10 @@ export class ActionService {
         this.workspaceRoot = vscode.workspace.workspaceFolders
             ? vscode.workspace.workspaceFolders[0].uri.fsPath
             : '';
-        this.dtoDirectory = path.join(this.workspaceRoot, "./projeto/actions");
+        this.dtoDirectory = path.join(this.workspaceRoot, "./actions");
     }
     criaAction(nome: string): boolean {
-        const nomeFormatado = this.geraNomeArquivoDto(nome);
+        const nomeFormatado = this.geraNomeArquivoAction(nome);
         const caminho = path.join(this.dtoDirectory, nomeFormatado);
         if (this.fileService.verificaArquivoExistente(caminho)) {
             return false;
@@ -22,7 +22,7 @@ export class ActionService {
         this.fileService.criaArquivo(caminho, conteudo);
         return true;
     }
-    
+
 
     gerarConteudoTemplate(nome: string): string {
         const templatePath = path.resolve(__dirname, "../dist/templates/Action.tpl");
@@ -32,7 +32,7 @@ export class ActionService {
         return template;
     }
 
-    geraNomeArquivoDto(nome: string): string {
+    geraNomeArquivoAction(nome: string): string {
         let nomeFormatado = this.normalizaNomeClasse(nome);
         return `${nomeFormatado}`;
     }
@@ -42,5 +42,10 @@ export class ActionService {
         nomeLimpo = nomeLimpo.replace(/_([a-zA-Z])/g, (_, letra) => letra.toUpperCase());
         nomeLimpo = nomeLimpo.charAt(0).toUpperCase() + nomeLimpo.slice(1);
         return `Manter${nomeLimpo}.php`;
+    }
+    async deletaAction(nome: string): Promise<void> {
+        const nomeFormatado = this.geraNomeArquivoAction(nome);
+        const filePath = path.join(this.workspaceRoot, `./dto/${nomeFormatado}`);
+        await this.fileService.deletarArquivo(filePath);
     }
 }

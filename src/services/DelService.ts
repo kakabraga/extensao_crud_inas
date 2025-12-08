@@ -10,7 +10,7 @@ export class DelService {
         this.workspaceRoot = vscode.workspace.workspaceFolders
             ? vscode.workspace.workspaceFolders[0].uri.fsPath
             : '';
-        this.dtoDirectory = path.join(this.workspaceRoot, "./projeto");
+        this.dtoDirectory = path.join(this.workspaceRoot, "./");
     }
 
     criaDel(nome: string): boolean {
@@ -53,7 +53,7 @@ export class DelService {
         nomelimpo = nomelimpo.toLowerCase();
 
         return `del_${nomelimpo}`;
-    } 
+    }
 
     toLowerCase(nome: string): string {
         nome = nome.replace(/([a-z0-9])([A-Z])/g, "$1_$2");
@@ -69,7 +69,12 @@ export class DelService {
     }
 
     gerarVariavel(nome: string): string {
-        const nomeLowerCase =this.toLowerCase(nome); 
-         return nomeLowerCase.charAt(0);
+        const nomeLowerCase = this.toLowerCase(nome);
+        return nomeLowerCase.charAt(0);
+    }
+    async deletaAction(nome: string): Promise<void> {
+        const nomeFormatado = this.geraNomeArquivoDel(nome);
+        const filePath = path.join(this.workspaceRoot, `./dto/${nomeFormatado}`);
+        await this.fileService.deletarArquivo(filePath);
     }
 }

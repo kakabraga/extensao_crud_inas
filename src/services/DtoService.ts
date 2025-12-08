@@ -64,7 +64,7 @@ export class DtoService {
         const nomeFormatado = this.geraNomeArquivoDto(nome);
         const filePath = path.join(this.workspaceRoot, `./dto/${nomeFormatado}`);
         await this.fileService.deletarArquivo(filePath);
-        this.chamaObserverDeleta("dtoDeletado", nomeFormatado);
+        this.chamaObserverDeleta("dtoDeletado", nome);
     }
 
 }
