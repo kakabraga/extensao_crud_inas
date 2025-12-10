@@ -80,7 +80,7 @@ export class GetService {
     }
     async deletaDel(nome: string): Promise<void> {
         const nomeFormatado = this.geraNomeArquivoGet(nome);
-        const filePath = path.join(this.workspaceRoot, `./${nomeFormatado}`);
+        const filePath = path.join(this.workspaceRoot, `${nomeFormatado}`);
         await this.fileService.deletarArquivo(filePath);
     }
 }
