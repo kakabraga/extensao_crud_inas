@@ -55,7 +55,7 @@ export class DtoService {
         const nomeSemExtensao = nome.replace(/\.php$/i, "");
         this.observer.emit("dtoCriado", { nome: nomeSemExtensao });
     }
-    chamaObserverDeleta(nome: string, event: string): void {
+    chamaObserverDeleta( event: string, nome: string,): void {
         const nomeSemExtensao = nome.replace(/\.php$/i, "");
         this.observer.emit(event, { nome: nomeSemExtensao });
     }
@@ -64,6 +64,7 @@ export class DtoService {
         const nomeFormatado = this.geraNomeArquivoDto(nome);
         const filePath = path.join(this.workspaceRoot, `./dto/${nomeFormatado}`);
         await this.fileService.deletarArquivo(filePath);
+        console.error("DELETA DTO: " + nome);
         this.chamaObserverDeleta("dtoDeletado", nome);
     }
 

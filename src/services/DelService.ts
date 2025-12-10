@@ -72,9 +72,9 @@ export class DelService {
         const nomeLowerCase = this.toLowerCase(nome);
         return nomeLowerCase.charAt(0);
     }
-    async deletaAction(nome: string): Promise<void> {
+    async deletaDel(nome: string): Promise<void> {
         const nomeFormatado = this.geraNomeArquivoDel(nome);
-        const filePath = path.join(this.workspaceRoot, `./dto/${nomeFormatado}`);
+        const filePath = path.join(this.workspaceRoot, `./${nomeFormatado}`);
         await this.fileService.deletarArquivo(filePath);
     }
 }

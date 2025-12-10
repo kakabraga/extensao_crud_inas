@@ -10,7 +10,7 @@ export class SalvaService {
         this.workspaceRoot = vscode.workspace.workspaceFolders
             ? vscode.workspace.workspaceFolders[0].uri.fsPath
             : '';
-        this.dtoDirectory = path.join(this.workspaceRoot, "./projeto");
+        this.dtoDirectory = path.join(this.workspaceRoot, "./");
     }
 
     criaSave(nome: string): boolean {

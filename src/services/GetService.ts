@@ -13,9 +13,12 @@ export class GetService {
         this.dtoDirectory = path.join(this.workspaceRoot, "./");
     }
 
-    criaDel(nome: string): boolean {
+    criaGet(nome: string): boolean {
+        console.log('nome recebido para criação' + nome);
         const nomeFormatado = this.geraNomeArquivoGet(nome);
+        console.log('nome FORMATADO para criação' + nomeFormatado);
         const caminho = path.join(this.dtoDirectory, nomeFormatado);
+        console.log('CAMINHA DE CRIAÇÃO' + caminho);
         if (this.fileService.verificaArquivoExistente(caminho)) {
             return false;
         }
@@ -78,9 +81,12 @@ export class GetService {
         const nomeLowerCase = this.toLowerCase(nome);
         return nomeLowerCase.charAt(0);
     }
-    async deletaDel(nome: string): Promise<void> {
+    async deletaGet(nome: string): Promise<void> {
+        console.log("nome recebido do DTO" + nome);
         const nomeFormatado = this.geraNomeArquivoGet(nome);
-        const filePath = path.join(this.workspaceRoot, `${nomeFormatado}`);
+        console.log("nome FOMRATADO" + nomeFormatado);
+        const filePath = path.join(this.workspaceRoot, `./${nomeFormatado}`);
+        console.log("caminho" + filePath);
         await this.fileService.deletarArquivo(filePath);
     }
 }
