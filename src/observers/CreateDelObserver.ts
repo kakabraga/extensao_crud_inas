@@ -13,4 +13,7 @@ export class CreateDelObserver implements IObserver {
     handle(payload: { nome: string }): void {
         this.delService.criaDel(payload.nome);
     }
+    deleta(payload: { nome: string }): void {
+        this.delService.deletaDel(payload.nome);
+    }
 }

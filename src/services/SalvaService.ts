@@ -53,7 +53,7 @@ export class SalvaService {
         nomelimpo = nomelimpo.toLowerCase();
 
         return `save_${nomelimpo}`;
-    } 
+    }
 
 
     toLowerCase(nome: string): string {
@@ -70,7 +70,13 @@ export class SalvaService {
     }
 
     gerarVariavel(nome: string): string {
-        const nomeLowerCase =this.toLowerCase(nome); 
-         return nomeLowerCase.charAt(0);
+        const nomeLowerCase = this.toLowerCase(nome);
+        return nomeLowerCase.charAt(0);
+    }
+
+    async deletaSave(nome: string): Promise<void> {
+        const nomeFormatado = this.geraNomeArquivoDto(nome);
+        const filePath = path.join(this.workspaceRoot, `./${nomeFormatado}`);
+        await this.fileService.deletarArquivo(filePath);
     }
 }

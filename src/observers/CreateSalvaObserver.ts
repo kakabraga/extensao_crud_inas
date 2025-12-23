@@ -9,8 +9,12 @@ export class CreateSalvaObserver implements IObserver {
     constructor(fileService: IFileService) {
         this.salvaService = new SalvaService(fileService);
     }
-    
+
     handle(payload: { nome: string }): void {
         this.salvaService.criaSave(payload.nome);
+    }
+    
+    deleta(payload: { nome: string }): void {
+        this.salvaService.deletaSave(payload.nome);
     }
 }

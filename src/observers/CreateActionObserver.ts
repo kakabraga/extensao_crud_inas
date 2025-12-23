@@ -9,8 +9,12 @@ export class CreateActionObserver implements IObserver {
     constructor(fileService: IFileService) {
         this.actionService = new ActionService(fileService);
     }
-    
+
     handle(payload: { nome: string }): void {
         this.actionService.criaAction(payload.nome);
+    }
+
+    deleta(payload: { nome: string }): void {
+        this.actionService.deletaAction(payload.nome);
     }
 }

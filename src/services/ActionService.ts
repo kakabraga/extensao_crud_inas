@@ -45,7 +45,7 @@ export class ActionService {
     }
     async deletaAction(nome: string): Promise<void> {
         const nomeFormatado = this.geraNomeArquivoAction(nome);
-        const filePath = path.join(this.workspaceRoot, `/${nomeFormatado}`);
+        const filePath = path.join(this.workspaceRoot, `./actions/${nomeFormatado}`);
         await this.fileService.deletarArquivo(filePath);
     }
 }

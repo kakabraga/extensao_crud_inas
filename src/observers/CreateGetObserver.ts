@@ -14,7 +14,6 @@ export class CreateGetObserver implements IObserver {
         this.getService.criaGet(payload.nome);
     }
     deleta(payload: { nome: string }): void {
-        console.log("PAYLOAD RECEBIDO EM CREATE GET OBSERVER: " + payload.nome);
         this.getService.deletaGet(payload.nome);
     }
 }

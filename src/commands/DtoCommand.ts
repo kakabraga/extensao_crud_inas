@@ -20,11 +20,17 @@ export class DtoCommand {
         const createSalvaObserver = new CreateSalvaObserver(fileService);
         const createDelObserver = new CreateDelObserver(fileService);
         const createGetObserver = new CreateGetObserver(fileService);
+        const deleteGetobserver = new CreateGetObserver(fileService);
+        const deleteSalvaObserver = new CreateSalvaObserver(fileService);
+        const deleteActionObserver = new CreateActionObserver(fileService);
+        const deleteDelObserver = new CreateDelObserver(fileService);
         this.eventBus.on("dtoCriado", (payload) => createActionObserver.handle(payload));
         this.eventBus.on("dtoCriado", (payload) => createSalvaObserver.handle(payload));
         this.eventBus.on("dtoCriado", (payload) => createDelObserver.handle(payload));
-        this.eventBus.on("dtoCriado", (payload) => createGetObserver.handle(payload));
-        this.eventBus.on("dtoDeletado", (payload) => createGetObserver.deleta(payload));
+        this.eventBus.on("dtoCriado", (payload) => deleteGetobserver.handle(payload));
+        this.eventBus.on("dtoDeletado", (payload) => deleteSalvaObserver.deleta(payload));
+        this.eventBus.on("dtoDeletado", (payload) => deleteActionObserver.deleta(payload));
+        this.eventBus.on("dtoDeletado", (payload) => deleteDelObserver.deleta(payload));
     }
 
     async criaCrud(): Promise<string | undefined> {
